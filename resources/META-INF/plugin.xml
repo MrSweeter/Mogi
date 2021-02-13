@@ -1,0 +1,56 @@
+<idea-plugin>
+  <id>be.msdc.mogi</id>
+  <name>Mogi</name>
+  <version>1.0</version>
+  <vendor email="dev.msdc@gmail.com">MSDC</vendor>
+
+  <description>Execute git submodule command easily with a toolbar button</description>
+
+  <change-notes>Execute git submodule command easily with a toolbar button</change-notes>
+
+  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="173.0"/>
+
+  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.lang</depends>
+  <depends>com.intellij.modules.platform</depends>
+  <!--<depends>com.intellij.modules.androidstudio</depends>-->
+
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+    <projectConfigurable instance="be.msdc.mogi.settings.MogiConfigurable" />
+    <applicationService serviceImplementation="be.msdc.mogi.settings.MogiSettings"/>
+  </extensions>
+
+  <actions>
+    <action id="MogiSubmoduleAction"
+            class="be.msdc.mogi.actions.MogiSubmoduleAction"
+            text="Git Submodule"
+            description="Run Mogi 'git sub module' command"
+            icon="/icons/mogiSync.svg" />
+
+    <group id="MogiNavBarActionsGroup">
+      <reference ref="MogiSubmoduleAction" />
+      <add-to-group group-id="VcsNavBarToobarActions" anchor="after" relative-to-action="ChangesView.Revert"  />
+    </group>
+
+    <group id="MogiToolbarActionsGroup">
+      <reference ref="MogiSubmoduleAction" />
+      <separator />
+      <add-to-group group-id="VcsToobarActions" anchor="last"  />
+    </group>
+
+    <group id="MogiTouchBarActionsGroup">
+      <reference ref="MogiSubmoduleAction" />
+      <add-to-group group-id="VcsTouchBarGroup" anchor="last"  />
+    </group>
+
+    <group id="MogiMenuGroup" text="Mogi">
+      <reference ref="MogiSubmoduleAction" />
+      <add-to-group group-id="MainMenu" />
+    </group>
+  </actions>
+
+</idea-plugin>

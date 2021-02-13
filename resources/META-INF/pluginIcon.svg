@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="151" height="186" viewBox="0 0 151 186">
+  <g id="Group_2" data-name="Group 2" transform="translate(-3913 -898)">
+    <g id="Rectangle_9" data-name="Rectangle 9" transform="translate(3913 898)" fill="#db5860" stroke="#6e6e6e" stroke-width="4">
+      <rect width="108" height="153" rx="8" stroke="none"/>
+      <rect x="2" y="2" width="104" height="149" rx="6" fill="none"/>
+    </g>
+    <g id="Rectangle_10" data-name="Rectangle 10" transform="translate(3928 914)" fill="#389fd6" stroke="#6e6e6e" stroke-width="4">
+      <rect width="108" height="153" rx="8" stroke="none"/>
+      <rect x="2" y="2" width="104" height="149" rx="6" fill="none"/>
+    </g>
+    <g id="Rectangle_11" data-name="Rectangle 11" transform="translate(3944 931)" fill="#e5e5e5" stroke="#6e6e6e" stroke-width="4">
+      <rect width="108" height="153" rx="8" stroke="none"/>
+      <rect x="2" y="2" width="104" height="149" rx="6" fill="none"/>
+    </g>
+    <g id="layer1" transform="translate(3968.945 931.922)">
+      <g id="g34" transform="translate(-35.946 10.078)">
+        <g id="g13" transform="translate(0 0)">
+          <rect id="canvas_background" width="131" height="131" transform="translate(0)" fill="none"/>
+        </g>
+        <g id="g18" transform="translate(25.208 10.083)">
+          <path id="svg_1" d="M83.493,25.915V10.79L63.326,30.957,83.493,51.123V36a30.274,30.274,0,0,1,30.25,30.25,29.6,29.6,0,0,1-3.529,14.117l7.361,7.361A40.263,40.263,0,0,0,83.493,25.915Zm0,70.584a30.274,30.274,0,0,1-30.25-30.25,29.6,29.6,0,0,1,3.529-14.117l-7.361-7.361a40.263,40.263,0,0,0,34.082,61.811v15.125l20.167-20.167L83.493,81.373Z" transform="translate(-43.159 -10.79)" fill="#eda200"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

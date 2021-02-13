@@ -5,26 +5,8 @@ import be.msdc.mogi.utils.MogiException
 import be.msdc.mogi.utils.NotificationManager
 import be.msdc.mogi.utils.ProcessRunner
 import be.msdc.mogi.utils.ProcessType
-import com.intellij.execution.ExecutionException
-import com.intellij.execution.configurations.GeneralCommandLine
-import com.intellij.execution.process.*
-import com.intellij.execution.ui.ConsoleViewContentType
-import com.intellij.notification.NotificationDisplayType
-import com.intellij.notification.NotificationGroup
-import com.intellij.notification.NotificationType
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.project.Project
-import com.intellij.openapi.util.SystemInfo
-import com.intellij.openapi.wm.ToolWindowManager
-import com.intellij.terminal.TerminalExecutionConsole
-import com.intellij.util.io.BaseDataReader.SleepingPolicy
-import com.intellij.util.io.BaseOutputReader
-import com.jetbrains.rd.util.string.PrettyPrinter
-import com.jetbrains.rd.util.string.print
-import org.jetbrains.annotations.NotNull
-import java.io.File
-import java.nio.charset.Charset
 
 
 class MogiSubmoduleAction : AnAction() {
@@ -32,7 +14,8 @@ class MogiSubmoduleAction : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
         val project = event.project
         project?.let { p ->
-            p.basePath?.let { path ->
+
+        p.basePath?.let { path ->
 
                 val args = mutableListOf("submodule", "update")
                 MogiSettings.getInstance().let {

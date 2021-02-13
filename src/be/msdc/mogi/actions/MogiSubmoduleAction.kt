@@ -14,8 +14,7 @@ class MogiSubmoduleAction : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
         val project = event.project
         project?.let { p ->
-
-        p.basePath?.let { path ->
+            p.basePath?.let { path ->
 
                 val args = mutableListOf("submodule", "update")
                 MogiSettings.getInstance().let {

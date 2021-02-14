@@ -1,4 +1,4 @@
-# Mogi
+# Mogi 0.0.2
 ![Mogi logo](https://i.imgur.com/4WZpK73.png)
 Execute git submodule command from your IDE
 

@@ -11,7 +11,7 @@ import com.intellij.openapi.components.Storage
 )
 class MogiSettings : PersistentStateComponent<MogiSettings> {
 
-    companion object    {
+    companion object {
         fun getInstance(): MogiSettings = ServiceManager.getService(MogiSettings::class.java)
     }
 
@@ -21,6 +21,7 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
     var useForce: Boolean = true
     var useCheckout: Boolean = true
     var useRecursive: Boolean = true
+    var checkoutGitBranch: String = "master"
 
     override fun getState(): MogiSettings {
         return this
@@ -33,5 +34,6 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
         this.useForce = that.useForce
         this.useCheckout = that.useCheckout
         this.useRecursive = that.useRecursive
+        this.checkoutGitBranch = that.checkoutGitBranch
     }
 }

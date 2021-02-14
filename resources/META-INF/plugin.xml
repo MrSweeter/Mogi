@@ -25,31 +25,41 @@
   </extensions>
 
   <actions>
-    <action id="MogiSubmoduleAction"
-            class="be.msdc.mogi.actions.MogiSubmoduleAction"
-            text="Git Submodule"
-            description="Run Mogi 'git sub module' command"
-            icon="/icons/mogiSync.svg" />
+    <action id="MogiSubmoduleUpdateAction"
+            class="be.msdc.mogi.actions.MogiGitSubmoduleUpdateAction"
+            text="Submodule Update"
+            description="Run Mogi [git submodule update] command"
+            icon="/icons/mogiSubmoduleUpdate.svg"/>
+
+    <action id="MogiSubmoduleCheckoutAction"
+            class="be.msdc.mogi.actions.MogiGitSubmoduleCheckoutAction"
+            text="Submodule Checkout"
+            description="Run Mogi [git submodule foreach 'git checkout -branch-'] command"
+            icon="/icons/mogiSubmoduleCheckout.svg"/>
 
     <group id="MogiNavBarActionsGroup">
-      <reference ref="MogiSubmoduleAction" />
-      <add-to-group group-id="VcsNavBarToobarActions" anchor="after" relative-to-action="ChangesView.Revert"  />
+      <reference ref="MogiSubmoduleUpdateAction"/>
+      <reference ref="MogiSubmoduleCheckoutAction"/>
+      <add-to-group group-id="VcsNavBarToobarActions" anchor="last"/>
     </group>
 
     <group id="MogiToolbarActionsGroup">
-      <reference ref="MogiSubmoduleAction" />
-      <separator />
-      <add-to-group group-id="VcsToobarActions" anchor="last"  />
+      <reference ref="MogiSubmoduleUpdateAction"/>
+      <reference ref="MogiSubmoduleCheckoutAction"/>
+      <separator/>
+      <add-to-group group-id="VcsToobarActions" anchor="last"/>
     </group>
 
     <group id="MogiTouchBarActionsGroup">
-      <reference ref="MogiSubmoduleAction" />
-      <add-to-group group-id="VcsTouchBarGroup" anchor="last"  />
+      <reference ref="MogiSubmoduleUpdateAction"/>
+      <reference ref="MogiSubmoduleCheckoutAction"/>
+      <add-to-group group-id="VcsTouchBarGroup" anchor="last"/>
     </group>
 
     <group id="MogiMenuGroup" text="Mogi">
-      <reference ref="MogiSubmoduleAction" />
-      <add-to-group group-id="MainMenu" />
+      <reference ref="MogiSubmoduleUpdateAction"/>
+      <reference ref="MogiSubmoduleCheckoutAction"/>
+      <add-to-group group-id="MainMenu"/>
     </group>
   </actions>
 

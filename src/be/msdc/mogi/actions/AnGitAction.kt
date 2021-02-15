@@ -15,7 +15,7 @@ abstract class AnGitAction : AnAction() {
             if (result.isSuccess()) {
                 NotificationManager.info("${cmd.name}: success", result.success, project)
             } else {
-                NotificationManager.warning("${cmd.name}: fail", result.fail, project)
+                NotificationManager.warning("${cmd.name}: fail", cmd.toString() + "\n\n" + result.fail, project)
             }
 
         } catch (ex: MogiException) {

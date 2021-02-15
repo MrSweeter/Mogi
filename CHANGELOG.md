@@ -9,3 +9,9 @@
 ### 0.0.3
 - New command: `git submodule foreach 'git checkout <branch>'`
 - Update icons
+
+### 0.0.4
+- Fix Git Checkout command on MacOS
+
+### 0.0.5
+- Add new customizable command

@@ -22,6 +22,7 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
     var useCheckout: Boolean = true
     var useRecursive: Boolean = true
     var checkoutGitBranch: String = "master"
+    var userCustomCommand: String = ""
 
     override fun getState(): MogiSettings {
         return this
@@ -35,5 +36,6 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
         this.useCheckout = that.useCheckout
         this.useRecursive = that.useRecursive
         this.checkoutGitBranch = that.checkoutGitBranch
+        this.userCustomCommand = that.userCustomCommand
     }
 }

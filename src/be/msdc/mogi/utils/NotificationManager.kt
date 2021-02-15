@@ -21,10 +21,12 @@ object NotificationManager {
     }
 
     fun error(ex: MogiException, project: Project, linkSettings: Boolean = true) {
+        var content = ex.localizedMessage
+        if (!ex.stack.isNullOrEmpty()) content += "\n\n" + ex.stack
         val n = mogiGroup.createNotification(
             "Mogi",
             "Exception",
-            ex.localizedMessage + "\n\n" + ex.stack,
+            content,
             NotificationType.ERROR,
             null
         )

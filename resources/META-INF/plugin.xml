@@ -37,15 +37,23 @@
             description="Run Mogi [git submodule foreach 'git checkout -branch-'] command"
             icon="/icons/mogiSubmoduleCheckout.svg"/>
 
+    <action id="MogiUserCustomCommandAction"
+            class="be.msdc.mogi.actions.MogiUserCustomCommandAction"
+            text="Custom Command"
+            description="Run Mogi [custom] command"
+            icon="AllIcons.Actions.GroupByClass"/>
+
     <group id="MogiNavBarActionsGroup">
       <reference ref="MogiSubmoduleUpdateAction"/>
       <reference ref="MogiSubmoduleCheckoutAction"/>
+      <reference ref="MogiUserCustomCommandAction"/>
       <add-to-group group-id="VcsNavBarToobarActions" anchor="last"/>
     </group>
 
     <group id="MogiToolbarActionsGroup">
       <reference ref="MogiSubmoduleUpdateAction"/>
       <reference ref="MogiSubmoduleCheckoutAction"/>
+      <reference ref="MogiUserCustomCommandAction"/>
       <separator/>
       <add-to-group group-id="VcsToobarActions" anchor="last"/>
     </group>
@@ -53,12 +61,14 @@
     <group id="MogiTouchBarActionsGroup">
       <reference ref="MogiSubmoduleUpdateAction"/>
       <reference ref="MogiSubmoduleCheckoutAction"/>
+      <reference ref="MogiUserCustomCommandAction"/>
       <add-to-group group-id="VcsTouchBarGroup" anchor="last"/>
     </group>
 
     <group id="MogiMenuGroup" text="Mogi">
       <reference ref="MogiSubmoduleUpdateAction"/>
       <reference ref="MogiSubmoduleCheckoutAction"/>
+      <reference ref="MogiUserCustomCommandAction"/>
       <add-to-group group-id="MainMenu"/>
     </group>
   </actions>

@@ -27,6 +27,7 @@ public class MogiSettingsPanel {
     private JLabel gitErrorMessage;
     private JLabel whereWhichErrorMessage;
     private JTextField checkoutGitBranch;
+    private JTextField customCommand;
 
     public JComponent getPanel() {
         return rootPanel;
@@ -40,6 +41,7 @@ public class MogiSettingsPanel {
         useCheckout.setSelected(settings.getUseCheckout());
         useRecursive.setSelected(settings.getUseRecursive());
         checkoutGitBranch.setText(settings.getCheckoutGitBranch());
+        customCommand.setText(settings.getUserCustomCommand());
     }
 
     public boolean isModified(MogiSettings settings) {
@@ -49,7 +51,8 @@ public class MogiSettingsPanel {
                 || settings.getUseCheckout() != useCheckout.isSelected()
                 || settings.getUseForce() != useForce.isSelected()
                 || settings.getUseRecursive() != useRecursive.isSelected()
-                || !settings.getCheckoutGitBranch().equals(checkoutGitBranch.getText());
+                || !settings.getCheckoutGitBranch().equals(checkoutGitBranch.getText())
+                || !settings.getUserCustomCommand().equals(customCommand.getText());
     }
 
     public void save(MogiSettings settings) {
@@ -60,6 +63,7 @@ public class MogiSettingsPanel {
         settings.setUseCheckout(useCheckout.isSelected());
         settings.setUseRecursive(useRecursive.isSelected());
         settings.setCheckoutGitBranch(checkoutGitBranch.getText());
+        settings.setUserCustomCommand(customCommand.getText());
     }
 
     private void createUIComponents() {

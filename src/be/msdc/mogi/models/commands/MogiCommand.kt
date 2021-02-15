@@ -26,7 +26,7 @@ abstract class MogiCommand {
         return "[$name] " + getCommandLine(null).commandLineString
     }
 
-    private fun setupCommandLine(workingDirectory: String?): GeneralCommandLine {
+    protected open fun setupCommandLine(workingDirectory: String?): GeneralCommandLine {
         val fullArgs = listOf(getCommand()) + getArgs()
         val cmd = GeneralCommandLine(fullArgs)
         cmd.charset = StandardCharsets.UTF_8
@@ -36,10 +36,11 @@ abstract class MogiCommand {
     }
 
     @Throws(MogiException::class)
-    fun getCommand(): String {
+    open fun getCommand(): String {
         val result = forceExecutable ?: when (type) {
             ProcessType.WHERE_WHICH -> MogiSettings.getInstance().whereWhichPath
             ProcessType.GIT -> MogiSettings.getInstance().gitPath
+            else -> ""
         }
 
         if (!type.isValid(result)) {

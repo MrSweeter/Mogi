@@ -43,6 +43,10 @@
             description="Run Mogi [custom] command"
             icon="AllIcons.Actions.GroupByClass"/>
 
+    <action id="MogiLabelAction"
+            class="be.msdc.mogi.actions.MogiLabelAction"
+            text="Mogi:"/>
+
     <group id="MogiNavBarActionsGroup">
       <reference ref="MogiSubmoduleUpdateAction"/>
       <reference ref="MogiSubmoduleCheckoutAction"/>

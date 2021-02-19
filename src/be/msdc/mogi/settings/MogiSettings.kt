@@ -15,13 +15,22 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
         fun getInstance(): MogiSettings = ServiceManager.getService(MogiSettings::class.java)
     }
 
+    // Where / Which
     var whereWhichPath: String = ""
-    var gitPath: String = ""
-    var useInit: Boolean = true
+
+    // Git
+    var useInit: Boolean = false
     var useForce: Boolean = true
     var useCheckout: Boolean = true
     var useRecursive: Boolean = true
+    var useSync: Boolean = false
     var checkoutGitBranch: String = "master"
+    var gitPath: String = ""
+
+    // GradleW
+    var gradlewPath: String = ""
+
+    // Custom
     var userCustomCommand: String = ""
 
     override fun getState(): MogiSettings {
@@ -30,12 +39,17 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
 
     override fun loadState(that: MogiSettings) {
         this.whereWhichPath = that.whereWhichPath
-        this.gitPath = that.gitPath
+
         this.useInit = that.useInit
         this.useForce = that.useForce
         this.useCheckout = that.useCheckout
         this.useRecursive = that.useRecursive
+        this.useSync = that.useSync
         this.checkoutGitBranch = that.checkoutGitBranch
+        this.gitPath = that.gitPath
+
+        this.gradlewPath = that.gradlewPath
+
         this.userCustomCommand = that.userCustomCommand
     }
 }

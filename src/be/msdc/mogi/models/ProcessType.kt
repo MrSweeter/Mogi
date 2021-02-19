@@ -5,6 +5,7 @@ import com.intellij.openapi.util.SystemInfo
 enum class ProcessType(private val win: String, private val mac: String) {
     WHERE_WHICH("where.exe", "which"),
     GIT("git.exe", "git"),
+    GRADLEW("gradlew", "gradlew"),
     CUSTOM("", "");
 
     fun isValid(path: String): Boolean {

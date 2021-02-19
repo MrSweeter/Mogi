@@ -28,7 +28,7 @@
     <action id="Mogi.PullAndUpdateAction"
             class="be.msdc.mogi.actions.MogiGitPullAndUpdateAction"
             text="Pull and Update"
-            description="git pull and git submodule update"
+            description="Git pull and git submodule update"
             icon="/icons/mogiSubmoduleUpdate.svg"/>
 
     <action id="Mogi.SubmoduleUpdateAction"

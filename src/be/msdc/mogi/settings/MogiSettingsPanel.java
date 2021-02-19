@@ -6,11 +6,8 @@ import be.msdc.mogi.models.commands.MogiCommand;
 import be.msdc.mogi.models.commands.WhereWhichCommand;
 import be.msdc.mogi.utils.MogiException;
 import be.msdc.mogi.utils.ProcessRunner;
-import com.intellij.ide.DataManager;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 
 import javax.swing.*;
@@ -192,12 +189,12 @@ public class MogiSettingsPanel {
         }
     }
 
-    private Project getProject() {
+    /*private Project getProject() {
         DataManager dm = DataManager.getInstanceIfCreated();
         if (dm != null) {
             return (Project) dm.getDataContext(rootPanel).getData(CommonDataKeys.PROJECT.getName());
         }
         return null;
-    }
+    }*/
     //endregion
 }

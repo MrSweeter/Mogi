@@ -10,7 +10,7 @@ import com.intellij.openapi.project.Project
 
 object NotificationManager {
 
-    val mogiGroup = NotificationGroup.balloonGroup("be.msdc.mogi")
+    private val mogiGroup = NotificationGroup.balloonGroup("be.msdc.mogi")
 
     fun info(title: String, desc: String, project: Project) {
         mogiGroup.createNotification("Mogi", title, desc, NotificationType.INFORMATION, null).notify(project)

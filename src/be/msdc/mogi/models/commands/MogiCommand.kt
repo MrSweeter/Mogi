@@ -3,6 +3,7 @@ package be.msdc.mogi.models.commands
 import be.msdc.mogi.models.ProcessType
 import be.msdc.mogi.settings.MogiSettings
 import be.msdc.mogi.utils.MogiException
+import be.msdc.mogi.utils.getMogiString
 import com.intellij.execution.configurations.GeneralCommandLine
 import java.io.File
 import java.nio.charset.StandardCharsets
@@ -23,7 +24,7 @@ abstract class MogiCommand {
     }
 
     override fun toString(): String {
-        return "[$name] " + getCommandLine(null).commandLineString
+        return getMogiString("command.toString", name, getCommandLine(null).commandLineString)
     }
 
     protected open fun setupCommandLine(workingDirectory: String?): GeneralCommandLine {
@@ -44,8 +45,8 @@ abstract class MogiCommand {
         }
 
         if (!type.isValid(result)) {
-            if (result.isEmpty()) throw MogiException("Empty path for $type command")
-            throw MogiException("$result is not a valid path for $type command")
+            if (result.isEmpty()) throw MogiException(getMogiString("error.empty.path", type.toString()))
+            throw MogiException(getMogiString("error.invalid", result, type.toString()))
         }
 
         return result

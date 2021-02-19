@@ -13,25 +13,27 @@ object NotificationManager {
     private val mogiGroup = NotificationGroup.balloonGroup("be.msdc.mogi")
 
     fun info(title: String, desc: String, project: Project) {
-        mogiGroup.createNotification("Mogi", title, desc, NotificationType.INFORMATION, null).notify(project)
+        mogiGroup.createNotification(getMogiString("app.name"), title, desc, NotificationType.INFORMATION, null)
+            .notify(project)
     }
 
     fun warning(title: String, desc: String, project: Project) {
-        mogiGroup.createNotification("Mogi", title, desc, NotificationType.WARNING, null).notify(project)
+        mogiGroup.createNotification(getMogiString("app.name"), title, desc, NotificationType.WARNING, null)
+            .notify(project)
     }
 
     fun error(ex: MogiException, project: Project, linkSettings: Boolean = true) {
         var content = ex.localizedMessage
         if (!ex.stack.isNullOrEmpty()) content += "\n\n" + ex.stack
         val n = mogiGroup.createNotification(
-            "Mogi",
-            "Exception",
+            getMogiString("app.name"),
+            getMogiString("error.exception"),
             content,
             NotificationType.ERROR,
             null
         )
         if (linkSettings) {
-            n.addAction(object : AnAction("Open settings") {
+            n.addAction(object : AnAction(getMogiString("error.link.settings")) {
                 override fun actionPerformed(p0: AnActionEvent) {
                     ShowSettingsUtil.getInstance().showSettingsDialog(
                         project,

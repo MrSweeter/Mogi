@@ -6,7 +6,6 @@ import be.msdc.mogi.utils.ProcessRunner
 import com.intellij.openapi.actionSystem.AnActionEvent
 
 class MogiGitPullAndUpdateAction : AnMogiAction() {
-
     override fun actionPerformed(event: AnActionEvent) {
         MogiSettings.getInstance().let {
             ProcessRunner.run(IntellijAction.UPDATE_PROJECT, event)

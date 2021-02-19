@@ -30,10 +30,10 @@ object ProcessRunner {
         } catch (e: MogiException) {
             throw e
         } catch (e: ProcessNotCreatedException) {
-            throw MogiException("Error: " + command.commandLineString + "\n" + e.localizedMessage)
+            throw MogiException(getMogiString("error.message", command.commandLineString + "\n" + e.localizedMessage))
         } catch (e: Exception) {
             throw MogiException(
-                "Error: " + command.commandLineString + "\n" + e.localizedMessage,
+                getMogiString("error.message", command.commandLineString + "\n" + e.localizedMessage),
                 e.stackTrace.toList().subList(0, 10).joinToString("\n")
             )
         }

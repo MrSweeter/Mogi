@@ -4,5 +4,9 @@ import java.util.*
 
 fun getMogiString(key: String, vararg args: String): String {
     if (args.isEmpty()) return ResourceBundle.getBundle("mogi").getString(key)
-    return String.format(ResourceBundle.getBundle("mogi").getString(key), args)
+    return try {
+        String.format(ResourceBundle.getBundle("mogi").getString(key), *args)
+    } catch (ex: MissingFormatArgumentException) {
+        ResourceBundle.getBundle("mogi").getString(key)
+    }
 }

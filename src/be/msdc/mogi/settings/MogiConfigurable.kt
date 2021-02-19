@@ -1,5 +1,6 @@
 package be.msdc.mogi.settings
 
+import be.msdc.mogi.utils.getMogiString
 import com.intellij.openapi.options.Configurable
 import javax.swing.JComponent
 
@@ -26,6 +27,6 @@ class MogiConfigurable : Configurable {
     }
 
     override fun getDisplayName(): String {
-        return "Mogi Settings"
+        return getMogiString("settings.title")
     }
 }

@@ -2,13 +2,14 @@ package be.msdc.mogi.models.commands
 
 import be.msdc.mogi.models.ProcessType
 import be.msdc.mogi.utils.MogiException
+import be.msdc.mogi.utils.getMogiString
 import com.intellij.execution.configurations.GeneralCommandLine
 import java.io.File
 import java.nio.charset.StandardCharsets
 
 class UserCustomCommand(private val userCommand: String) : MogiCommand() {
 
-    override val name: String = "Custom Command"
+    override val name: String = getMogiString("command.custom.name")
     override val type: ProcessType = ProcessType.CUSTOM
 
     override fun getArgs(): List<String> {
@@ -19,8 +20,8 @@ class UserCustomCommand(private val userCommand: String) : MogiCommand() {
 
     private fun getValidCommand(): String {
         if (!type.isValid(userCommand)) {
-            if (userCommand.isEmpty()) throw MogiException("Empty path for $type command")
-            throw MogiException("$userCommand is not a valid path for $type command")
+            if (userCommand.isEmpty()) throw MogiException(getMogiString("error.empty.path", type.toString()))
+            throw MogiException(getMogiString("error.invalid", userCommand, type.toString()))
         }
         return userCommand
     }

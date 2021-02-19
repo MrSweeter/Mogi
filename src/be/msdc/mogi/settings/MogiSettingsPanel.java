@@ -2,11 +2,9 @@ package be.msdc.mogi.settings;
 
 import be.msdc.mogi.models.MogiResult;
 import be.msdc.mogi.models.ProcessType;
-import be.msdc.mogi.models.commands.GradlewVersionCommand;
 import be.msdc.mogi.models.commands.MogiCommand;
 import be.msdc.mogi.models.commands.WhereWhichCommand;
 import be.msdc.mogi.utils.MogiException;
-import be.msdc.mogi.utils.Placeholder;
 import be.msdc.mogi.utils.ProcessRunner;
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -35,8 +33,6 @@ public class MogiSettingsPanel {
     private JTextField checkoutGitBranch;
     private TextFieldWithBrowseButton gitPath;
     private JLabel gitErrorMessage;
-    private TextFieldWithBrowseButton gradlewPath;
-    private JLabel gradlewErrorMessage;
     private JTextField customCommand;
 
     //region Public
@@ -47,21 +43,18 @@ public class MogiSettingsPanel {
     public void load(MogiSettings settings) {
         whereWhichLoad(settings);
         gitLoad(settings);
-        gradlewLoad(settings);
         customLoad(settings);
     }
 
     public boolean isModified(MogiSettings settings) {
         return whereWhichModified(settings)
                 || gitModified(settings)
-                || gradlewModified(settings)
                 || customModified(settings);
     }
 
     public void save(MogiSettings settings) {
         whereWhichSave(settings);
         gitSave(settings);
-        gradlewSave(settings);
         customSave(settings);
     }
     //endregion
@@ -114,21 +107,6 @@ public class MogiSettingsPanel {
     }
     //endregion
 
-    //region Gradlew
-    private void gradlewLoad(MogiSettings settings) {
-        gradlewErrorMessage.setText("");
-        gradlewPath.setText(settings.getGradlewPath().trim());
-    }
-
-    private boolean gradlewModified(MogiSettings settings) {
-        return !settings.getGradlewPath().equals(gradlewPath.getText());
-    }
-
-    private void gradlewSave(MogiSettings settings) {
-        settings.setGradlewPath(gradlewPath.getText());
-    }
-    //endregion
-
     //region Custom
     private void customLoad(MogiSettings settings) {
         customCommand.setText(settings.getUserCustomCommand());
@@ -159,23 +137,6 @@ public class MogiSettingsPanel {
             }
         });
 
-        gradlewPath = new TextFieldWithBrowseButton();
-        final FileChooserDescriptor gdesc = FileChooserDescriptorFactory.createSingleLocalFileDescriptor();
-        gradlewPath.addBrowseFolderListener("Mogi Git Path", "Choose git path", null, gdesc);
-        gradlewPath.getTextField().addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (!gradlewPath.getText().contains(Placeholder.PROJECT.getLabel())) {
-                    verifyPath(ProcessType.GRADLEW, gradlewPath.getTextField(), gradlewErrorMessage, false);
-                    verifyGradle();
-                }
-            }
-        });
-
         whereWhichPath = new TextFieldWithBrowseButton();
         final FileChooserDescriptor wDesc = FileChooserDescriptorFactory.createSingleLocalFileDescriptor();
         whereWhichPath.addBrowseFolderListener("Mogi Where/Which Path", "Choose where/which path", null, wDesc);
@@ -188,7 +149,6 @@ public class MogiSettingsPanel {
             public void focusLost(FocusEvent e) {
                 if (verifyPath(ProcessType.WHERE_WHICH, whereWhichPath.getTextField(), whereWhichErrorMessage, !gitPath.getText().isEmpty())) {
                     updateGitFromWhereWhich();
-                    updateGradlewFromWhereWhich();
                 }
             }
         });
@@ -213,27 +173,6 @@ public class MogiSettingsPanel {
         return true;
     }
 
-    private void verifyGradle() {
-        if (!gradlewPath.getText().isEmpty()) {
-            try {
-                Project project = getProject();
-                if (project != null) {
-                    MogiCommand cmd = new GradlewVersionCommand(project.getBasePath());
-                    cmd.setForceExecutable(gradlewPath.getText());
-
-                    MogiResult out = ProcessRunner.INSTANCE.run(cmd, project.getBasePath());
-                    if (gitPath.getText().isEmpty() && out.isSuccess()) {
-                        gitPath.setText(out.getSuccess().trim());
-                    } else if (!out.isSuccess()) {
-                        whereWhichErrorMessage.setText(out.getFail());
-                    }
-                }
-            } catch (MogiException ex) {
-                gradlewErrorMessage.setText(ex.getLocalizedMessage());
-            }
-        }
-    }
-
     private void updateGitFromWhereWhich() {
         if (gitPath.getText().isEmpty() && !whereWhichPath.getText().isEmpty()) {
 
@@ -246,28 +185,6 @@ public class MogiSettingsPanel {
                     gitPath.setText(out.getSuccess().trim());
                 } else if (!out.isSuccess()) {
                     whereWhichErrorMessage.setText(out.getFail());
-                }
-            } catch (MogiException ex) {
-                whereWhichErrorMessage.setText(ex.getLocalizedMessage());
-            }
-        }
-    }
-
-    private void updateGradlewFromWhereWhich() {
-        if (gradlewPath.getText().isEmpty() && !whereWhichPath.getText().isEmpty()) {
-
-            try {
-                MogiCommand cmd = new WhereWhichCommand((ProcessType.GRADLEW.getExecutableName()));
-                cmd.setForceExecutable(whereWhichPath.getText());
-
-                Project project = getProject();
-                if (project != null) {
-                    MogiResult out = ProcessRunner.INSTANCE.run(cmd, project.getBasePath());
-                    if (gitPath.getText().isEmpty() && out.isSuccess()) {
-                        gitPath.setText(out.getSuccess().trim());
-                    } else if (!out.isSuccess()) {
-                        whereWhichErrorMessage.setText(out.getFail());
-                    }
                 }
             } catch (MogiException ex) {
                 whereWhichErrorMessage.setText(ex.getLocalizedMessage());

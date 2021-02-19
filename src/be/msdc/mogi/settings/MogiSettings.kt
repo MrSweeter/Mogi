@@ -1,6 +1,5 @@
 package be.msdc.mogi.settings
 
-import be.msdc.mogi.models.ProcessType
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.State
@@ -28,9 +27,6 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
     var checkoutGitBranch: String = "master"
     var gitPath: String = ""
 
-    // GradleW
-    var gradlewPath: String = "%project%/${ProcessType.GRADLEW.getExecutableName()}"
-
     // Custom
     var userCustomCommand: String = ""
 
@@ -48,8 +44,6 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
         this.useSync = that.useSync
         this.checkoutGitBranch = that.checkoutGitBranch
         this.gitPath = that.gitPath
-
-        this.gradlewPath = that.gradlewPath
 
         this.userCustomCommand = that.userCustomCommand
     }

@@ -6,8 +6,14 @@ import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.process.CapturingProcessHandler
 import com.intellij.execution.process.ProcessNotCreatedException
 import com.intellij.execution.process.ProcessOutput
+import com.intellij.openapi.actionSystem.ActionManager
+import com.intellij.openapi.actionSystem.AnActionEvent
 
 object ProcessRunner {
+
+    fun run(action: IntellijAction, event: AnActionEvent) {
+        ActionManager.getInstance().getAction(action.value)?.actionPerformed(event)
+    }
 
     @Throws(MogiException::class)
     fun run(command: MogiCommand, workingDirectory: String? = null): MogiResult {

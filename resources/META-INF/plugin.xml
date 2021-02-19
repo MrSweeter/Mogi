@@ -25,54 +25,67 @@
   </extensions>
 
   <actions>
-    <action id="MogiSubmoduleUpdateAction"
+    <action id="Mogi.PullAndUpdateAction"
+            class="be.msdc.mogi.actions.MogiGitPullAndUpdateAction"
+            text="Pull and Update"
+            description="git pull and git submodule update"
+            icon="/icons/mogiSubmoduleUpdate.svg"/>
+
+    <action id="Mogi.SubmoduleUpdateAction"
             class="be.msdc.mogi.actions.MogiGitSubmoduleUpdateAction"
             text="Submodule Update"
             description="Run Mogi [git submodule update] command"
             icon="/icons/mogiSubmoduleUpdate.svg"/>
 
-    <action id="MogiSubmoduleCheckoutAction"
+    <action id="Mogi.SubmoduleCheckoutAction"
             class="be.msdc.mogi.actions.MogiGitSubmoduleCheckoutAction"
             text="Submodule Checkout"
             description="Run Mogi [git submodule foreach 'git checkout -branch-'] command"
             icon="/icons/mogiSubmoduleCheckout.svg"/>
 
-    <action id="MogiUserCustomCommandAction"
+    <action id="Mogi.UserCustomCommandAction"
             class="be.msdc.mogi.actions.MogiUserCustomCommandAction"
             text="Custom Command"
             description="Run Mogi [custom] command"
             icon="AllIcons.Actions.GroupByClass"/>
 
-    <action id="MogiLabelAction"
+    <action id="Mogi.LabelAction"
             class="be.msdc.mogi.actions.MogiLabelAction"
             text="Mogi:"/>
 
     <group id="MogiNavBarActionsGroup">
-      <reference ref="MogiSubmoduleUpdateAction"/>
-      <reference ref="MogiSubmoduleCheckoutAction"/>
-      <reference ref="MogiUserCustomCommandAction"/>
+      <reference ref="Mogi.LabelAction"/>
+      <reference ref="Mogi.PullAndUpdateAction"/>
+      <reference ref="Mogi.SubmoduleUpdateAction"/>
+      <reference ref="Mogi.SubmoduleCheckoutAction"/>
+      <reference ref="Mogi.UserCustomCommandAction"/>
       <add-to-group group-id="VcsNavBarToobarActions" anchor="last"/>
     </group>
 
     <group id="MogiToolbarActionsGroup">
-      <reference ref="MogiSubmoduleUpdateAction"/>
-      <reference ref="MogiSubmoduleCheckoutAction"/>
-      <reference ref="MogiUserCustomCommandAction"/>
+      <reference ref="Mogi.LabelAction"/>
+      <reference ref="Mogi.PullAndUpdateAction"/>
+      <reference ref="Mogi.SubmoduleUpdateAction"/>
+      <reference ref="Mogi.SubmoduleCheckoutAction"/>
+      <reference ref="Mogi.UserCustomCommandAction"/>
       <separator/>
       <add-to-group group-id="VcsToobarActions" anchor="last"/>
     </group>
 
     <group id="MogiTouchBarActionsGroup">
-      <reference ref="MogiSubmoduleUpdateAction"/>
-      <reference ref="MogiSubmoduleCheckoutAction"/>
-      <reference ref="MogiUserCustomCommandAction"/>
+      <reference ref="Mogi.LabelAction"/>
+      <reference ref="Mogi.PullAndUpdateAction"/>
+      <reference ref="Mogi.SubmoduleUpdateAction"/>
+      <reference ref="Mogi.SubmoduleCheckoutAction"/>
+      <reference ref="Mogi.UserCustomCommandAction"/>
       <add-to-group group-id="VcsTouchBarGroup" anchor="last"/>
     </group>
 
     <group id="MogiMenuGroup" text="Mogi">
-      <reference ref="MogiSubmoduleUpdateAction"/>
-      <reference ref="MogiSubmoduleCheckoutAction"/>
-      <reference ref="MogiUserCustomCommandAction"/>
+      <reference ref="Mogi.PullAndUpdateAction"/>
+      <reference ref="Mogi.SubmoduleUpdateAction"/>
+      <reference ref="Mogi.SubmoduleCheckoutAction"/>
+      <reference ref="Mogi.UserCustomCommandAction"/>
       <add-to-group group-id="MainMenu"/>
     </group>
   </actions>

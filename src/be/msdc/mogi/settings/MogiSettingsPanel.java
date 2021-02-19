@@ -2,9 +2,11 @@ package be.msdc.mogi.settings;
 
 import be.msdc.mogi.models.MogiResult;
 import be.msdc.mogi.models.ProcessType;
+import be.msdc.mogi.models.commands.GradlewVersionCommand;
 import be.msdc.mogi.models.commands.MogiCommand;
 import be.msdc.mogi.models.commands.WhereWhichCommand;
 import be.msdc.mogi.utils.MogiException;
+import be.msdc.mogi.utils.Placeholder;
 import be.msdc.mogi.utils.ProcessRunner;
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -23,31 +25,24 @@ public class MogiSettingsPanel {
     private JComponent rootPanel;
     private JTabbedPane tabPanel;
 
-    //region Public
-
-    public JComponent getPanel() {
-        return rootPanel;
-    }
-
-    //region WhereWhich
     private TextFieldWithBrowseButton whereWhichPath;
     private JLabel whereWhichErrorMessage;
-    //region Git
     private JCheckBox useInit;
-    //endregion
     private JCheckBox useForce;
     private JCheckBox useCheckout;
     private JCheckBox useRecursive;
     private JCheckBox useSync;
     private JTextField checkoutGitBranch;
-    //endregion
     private TextFieldWithBrowseButton gitPath;
     private JLabel gitErrorMessage;
-    //region Gradlew
     private TextFieldWithBrowseButton gradlewPath;
     private JLabel gradlewErrorMessage;
-    //region Custom
     private JTextField customCommand;
+
+    //region Public
+    public JComponent getPanel() {
+        return rootPanel;
+    }
 
     public void load(MogiSettings settings) {
         whereWhichLoad(settings);
@@ -69,7 +64,9 @@ public class MogiSettingsPanel {
         gradlewSave(settings);
         customSave(settings);
     }
+    //endregion
 
+    //region WhereWhich
     private void whereWhichLoad(MogiSettings settings) {
         whereWhichErrorMessage.setText("");
         whereWhichPath.setText(settings.getWhereWhichPath().trim());
@@ -84,12 +81,14 @@ public class MogiSettingsPanel {
     }
     //endregion
 
+    //region Git
     private void gitLoad(MogiSettings settings) {
         gitErrorMessage.setText("");
         useInit.setSelected(settings.getUseInit());
         useForce.setSelected(settings.getUseForce());
         useCheckout.setSelected(settings.getUseCheckout());
         useRecursive.setSelected(settings.getUseRecursive());
+        useSync.setSelected(settings.getUseSync());
         checkoutGitBranch.setText(settings.getCheckoutGitBranch());
         gitPath.setText(settings.getGitPath().trim());
     }
@@ -113,21 +112,24 @@ public class MogiSettingsPanel {
         settings.setCheckoutGitBranch(checkoutGitBranch.getText());
         settings.setGitPath(gitPath.getText());
     }
+    //endregion
 
+    //region Gradlew
     private void gradlewLoad(MogiSettings settings) {
         gradlewErrorMessage.setText("");
-        gradlewPath.setText(settings.getWhereWhichPath().trim());
+        gradlewPath.setText(settings.getGradlewPath().trim());
     }
 
     private boolean gradlewModified(MogiSettings settings) {
         return !settings.getGradlewPath().equals(gradlewPath.getText());
     }
-    //endregion
 
     private void gradlewSave(MogiSettings settings) {
         settings.setGradlewPath(gradlewPath.getText());
     }
+    //endregion
 
+    //region Custom
     private void customLoad(MogiSettings settings) {
         customCommand.setText(settings.getUserCustomCommand());
     }
@@ -167,7 +169,10 @@ public class MogiSettingsPanel {
 
             @Override
             public void focusLost(FocusEvent e) {
-                verifyPath(ProcessType.GRADLEW, gradlewPath.getTextField(), gradlewErrorMessage, false);
+                if (!gradlewPath.getText().contains(Placeholder.PROJECT.getLabel())) {
+                    verifyPath(ProcessType.GRADLEW, gradlewPath.getTextField(), gradlewErrorMessage, false);
+                    verifyGradle();
+                }
             }
         });
 
@@ -208,6 +213,27 @@ public class MogiSettingsPanel {
         return true;
     }
 
+    private void verifyGradle() {
+        if (!gradlewPath.getText().isEmpty()) {
+            try {
+                Project project = getProject();
+                if (project != null) {
+                    MogiCommand cmd = new GradlewVersionCommand(project.getBasePath());
+                    cmd.setForceExecutable(gradlewPath.getText());
+
+                    MogiResult out = ProcessRunner.INSTANCE.run(cmd, project.getBasePath());
+                    if (gitPath.getText().isEmpty() && out.isSuccess()) {
+                        gitPath.setText(out.getSuccess().trim());
+                    } else if (!out.isSuccess()) {
+                        whereWhichErrorMessage.setText(out.getFail());
+                    }
+                }
+            } catch (MogiException ex) {
+                gradlewErrorMessage.setText(ex.getLocalizedMessage());
+            }
+        }
+    }
+
     private void updateGitFromWhereWhich() {
         if (gitPath.getText().isEmpty() && !whereWhichPath.getText().isEmpty()) {
 
@@ -234,23 +260,27 @@ public class MogiSettingsPanel {
                 MogiCommand cmd = new WhereWhichCommand((ProcessType.GRADLEW.getExecutableName()));
                 cmd.setForceExecutable(whereWhichPath.getText());
 
-                DataManager dm = DataManager.getInstanceIfCreated();
-                if (dm != null) {
-                    Project project = (Project) dm.getDataContext(rootPanel).getData(CommonDataKeys.PROJECT.getName());
-
-                    if (project != null) {
-                        MogiResult out = ProcessRunner.INSTANCE.run(cmd, project.getBasePath());
-                        if (gitPath.getText().isEmpty() && out.isSuccess()) {
-                            gitPath.setText(out.getSuccess().trim());
-                        } else if (!out.isSuccess()) {
-                            whereWhichErrorMessage.setText(out.getFail());
-                        }
+                Project project = getProject();
+                if (project != null) {
+                    MogiResult out = ProcessRunner.INSTANCE.run(cmd, project.getBasePath());
+                    if (gitPath.getText().isEmpty() && out.isSuccess()) {
+                        gitPath.setText(out.getSuccess().trim());
+                    } else if (!out.isSuccess()) {
+                        whereWhichErrorMessage.setText(out.getFail());
                     }
                 }
             } catch (MogiException ex) {
                 whereWhichErrorMessage.setText(ex.getLocalizedMessage());
             }
         }
+    }
+
+    private Project getProject() {
+        DataManager dm = DataManager.getInstanceIfCreated();
+        if (dm != null) {
+            return (Project) dm.getDataContext(rootPanel).getData(CommonDataKeys.PROJECT.getName());
+        }
+        return null;
     }
     //endregion
 }

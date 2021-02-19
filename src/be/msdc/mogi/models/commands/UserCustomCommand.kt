@@ -36,7 +36,7 @@ class UserCustomCommand(private val userCommand: String) : MogiCommand() {
         //cmd.exePath = getCommand(process)
     }
 
-    override fun getCommand(): String {
+    override fun getCommand(workingDirectory: String?): String {
         return getValidCommand()
     }
 

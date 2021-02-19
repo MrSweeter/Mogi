@@ -3,6 +3,7 @@ package be.msdc.mogi.models.commands
 import be.msdc.mogi.models.ProcessType
 import be.msdc.mogi.settings.MogiSettings
 import be.msdc.mogi.utils.MogiException
+import be.msdc.mogi.utils.Placeholder
 import com.intellij.execution.configurations.GeneralCommandLine
 import java.io.File
 import java.nio.charset.StandardCharsets
@@ -27,7 +28,7 @@ abstract class MogiCommand {
     }
 
     protected open fun setupCommandLine(workingDirectory: String?): GeneralCommandLine {
-        val fullArgs = listOf(getCommand()) + getArgs()
+        val fullArgs = listOf(getCommand(workingDirectory)) + getArgs()
         val cmd = GeneralCommandLine(fullArgs)
         cmd.charset = StandardCharsets.UTF_8
         workingDirectory?.let { cmd.workDirectory = File(it) }
@@ -36,10 +37,14 @@ abstract class MogiCommand {
     }
 
     @Throws(MogiException::class)
-    open fun getCommand(): String {
+    open fun getCommand(workingDirectory: String?): String {
         val result = forceExecutable ?: when (type) {
             ProcessType.WHERE_WHICH -> MogiSettings.getInstance().whereWhichPath
             ProcessType.GIT -> MogiSettings.getInstance().gitPath
+            ProcessType.GRADLEW -> {
+                val p = MogiSettings.getInstance().gradlewPath
+                return p.replace(Placeholder.PROJECT.label, workingDirectory ?: "")
+            }
             else -> ""
         }
 

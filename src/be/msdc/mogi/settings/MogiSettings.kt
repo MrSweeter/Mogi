@@ -1,5 +1,6 @@
 package be.msdc.mogi.settings
 
+import be.msdc.mogi.models.ProcessType
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.components.State
@@ -28,7 +29,7 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
     var gitPath: String = ""
 
     // GradleW
-    var gradlewPath: String = ""
+    var gradlewPath: String = "%project%/${ProcessType.GRADLEW.getExecutableName()}"
 
     // Custom
     var userCustomCommand: String = ""

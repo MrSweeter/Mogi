@@ -24,6 +24,7 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
     var useCheckout: Boolean = true
     var useRecursive: Boolean = true
     var useSync: Boolean = false
+    var useIntellijPull: Boolean = false
     var checkoutGitBranch: String = "master"
     var gitPath: String = ""
 
@@ -42,6 +43,7 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
         this.useCheckout = that.useCheckout
         this.useRecursive = that.useRecursive
         this.useSync = that.useSync
+        this.useIntellijPull = that.useIntellijPull
         this.checkoutGitBranch = that.checkoutGitBranch
         this.gitPath = that.gitPath
 

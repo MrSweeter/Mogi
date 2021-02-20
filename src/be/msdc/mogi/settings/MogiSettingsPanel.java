@@ -31,6 +31,7 @@ public class MogiSettingsPanel {
     private TextFieldWithBrowseButton gitPath;
     private JLabel gitErrorMessage;
     private JTextField customCommand;
+    private JCheckBox useIntellijGitPull;
 
     //region Public
     public JComponent getPanel() {
@@ -79,6 +80,7 @@ public class MogiSettingsPanel {
         useCheckout.setSelected(settings.getUseCheckout());
         useRecursive.setSelected(settings.getUseRecursive());
         useSync.setSelected(settings.getUseSync());
+        useIntellijGitPull.setSelected(settings.getUseIntellijPull());
         checkoutGitBranch.setText(settings.getCheckoutGitBranch());
         gitPath.setText(settings.getGitPath().trim());
     }
@@ -89,6 +91,7 @@ public class MogiSettingsPanel {
                 || settings.getUseForce() != useForce.isSelected()
                 || settings.getUseRecursive() != useRecursive.isSelected()
                 || settings.getUseSync() != useSync.isSelected()
+                || settings.getUseIntellijPull() != useIntellijGitPull.isSelected()
                 || !settings.getCheckoutGitBranch().equals(checkoutGitBranch.getText())
                 || !settings.getGitPath().equals(gitPath.getText());
     }
@@ -99,6 +102,7 @@ public class MogiSettingsPanel {
         settings.setUseCheckout(useCheckout.isSelected());
         settings.setUseRecursive(useRecursive.isSelected());
         settings.setUseSync(useSync.isSelected());
+        settings.setUseIntellijPull(useIntellijGitPull.isSelected());
         settings.setCheckoutGitBranch(checkoutGitBranch.getText());
         settings.setGitPath(gitPath.getText());
     }

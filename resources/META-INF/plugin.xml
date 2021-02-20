@@ -27,19 +27,19 @@
   <actions resource-bundle="mogi">
     <action id="Mogi.PullAndUpdateAction"
             class="be.msdc.mogi.actions.MogiGitPullAndUpdateAction"
-            icon="/icons/mogiSubmoduleUpdate.svg"/>
+            icon="/icons/pullAndUpdate.svg"/>
 
     <action id="Mogi.SubmoduleUpdateAction"
             class="be.msdc.mogi.actions.MogiGitSubmoduleUpdateAction"
-            icon="/icons/mogiSubmoduleUpdate.svg"/>
+            icon="/icons/submoduleUpdate.svg"/>
 
     <action id="Mogi.SubmoduleCheckoutAction"
             class="be.msdc.mogi.actions.MogiGitSubmoduleCheckoutAction"
-            icon="/icons/mogiSubmoduleCheckout.svg"/>
+            icon="/icons/checkoutAndSync.svg"/>
 
     <action id="Mogi.UserCustomCommandAction"
             class="be.msdc.mogi.actions.MogiUserCustomCommandAction"
-            icon="AllIcons.Actions.GroupByClass"/>
+            icon="/icons/customCommand.svg"/>
 
     <action id="Mogi.LabelAction"
             class="be.msdc.mogi.actions.MogiLabelAction"/>

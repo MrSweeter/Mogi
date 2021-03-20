@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>be.msdc.mogi</id>
   <name>Mogi</name>
-  <version>0.0.5</version>
+  <version>0.0.7</version>
   <vendor email="dev.msdc@gmail.com">MSDC</vendor>
 
   <description>Execute git submodule command easily with a toolbar button</description>

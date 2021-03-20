@@ -15,3 +15,13 @@
 
 ### 0.0.5
 - Add new customizable command
+
+### 0.0.6
+- Update UI
+- Strings file
+- Add Intellij Pull 
+- Add Gradle sync setting
+
+### 0.0.7
+- Remove TouchBar action group
+- Add new setting to allow dynamic branch selection for checkout submodule

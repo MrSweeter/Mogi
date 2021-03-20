@@ -26,6 +26,7 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
     var useSync: Boolean = false
     var useIntellijPull: Boolean = false
     var checkoutGitBranch: String = "master"
+    var checkoutGitBranchRequest: Boolean = true
     var gitPath: String = ""
 
     // Custom
@@ -45,6 +46,7 @@ class MogiSettings : PersistentStateComponent<MogiSettings> {
         this.useSync = that.useSync
         this.useIntellijPull = that.useIntellijPull
         this.checkoutGitBranch = that.checkoutGitBranch
+        this.checkoutGitBranchRequest = that.checkoutGitBranchRequest
         this.gitPath = that.gitPath
 
         this.userCustomCommand = that.userCustomCommand

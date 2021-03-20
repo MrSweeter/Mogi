@@ -32,6 +32,7 @@ public class MogiSettingsPanel {
     private JLabel gitErrorMessage;
     private JTextField customCommand;
     private JCheckBox useIntellijGitPull;
+    private JCheckBox checkoutAskEachTime;
 
     //region Public
     public JComponent getPanel() {
@@ -82,6 +83,7 @@ public class MogiSettingsPanel {
         useSync.setSelected(settings.getUseSync());
         useIntellijGitPull.setSelected(settings.getUseIntellijPull());
         checkoutGitBranch.setText(settings.getCheckoutGitBranch());
+        checkoutAskEachTime.setSelected(settings.getCheckoutGitBranchRequest());
         gitPath.setText(settings.getGitPath().trim());
     }
 
@@ -93,6 +95,7 @@ public class MogiSettingsPanel {
                 || settings.getUseSync() != useSync.isSelected()
                 || settings.getUseIntellijPull() != useIntellijGitPull.isSelected()
                 || !settings.getCheckoutGitBranch().equals(checkoutGitBranch.getText())
+                || settings.getCheckoutGitBranchRequest() != checkoutAskEachTime.isSelected()
                 || !settings.getGitPath().equals(gitPath.getText());
     }
 
@@ -104,6 +107,7 @@ public class MogiSettingsPanel {
         settings.setUseSync(useSync.isSelected());
         settings.setUseIntellijPull(useIntellijGitPull.isSelected());
         settings.setCheckoutGitBranch(checkoutGitBranch.getText());
+        settings.setCheckoutGitBranchRequest(checkoutAskEachTime.isSelected());
         settings.setGitPath(gitPath.getText());
     }
     //endregion

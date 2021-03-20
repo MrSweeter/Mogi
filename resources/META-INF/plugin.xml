@@ -63,15 +63,6 @@
       <add-to-group group-id="VcsToobarActions" anchor="last"/>
     </group>
 
-    <group id="MogiTouchBarActionsGroup">
-      <reference ref="Mogi.LabelAction"/>
-      <reference ref="Mogi.PullAndUpdateAction"/>
-      <reference ref="Mogi.SubmoduleUpdateAction"/>
-      <reference ref="Mogi.SubmoduleCheckoutAction"/>
-      <reference ref="Mogi.UserCustomCommandAction"/>
-      <add-to-group group-id="VcsTouchBarGroup" anchor="last"/>
-    </group>
-
     <group id="MogiMenuGroup" text="Mogi">
       <reference ref="Mogi.PullAndUpdateAction"/>
       <reference ref="Mogi.SubmoduleUpdateAction"/>

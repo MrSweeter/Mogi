@@ -1,15 +1,12 @@
 <idea-plugin>
   <id>be.msdc.mogi</id>
   <name>Mogi</name>
-  <version>0.0.7</version>
+  <version>0.0.8</version>
   <vendor email="dev.msdc@gmail.com">MSDC</vendor>
 
   <description>Execute git submodule command easily with a toolbar button</description>
 
   <change-notes>Execute git submodule command easily with a toolbar button</change-notes>
-
-  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="173.0"/>
 
   <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
        on how to target different products -->
@@ -50,7 +47,7 @@
       <reference ref="Mogi.SubmoduleUpdateAction"/>
       <reference ref="Mogi.SubmoduleCheckoutAction"/>
       <reference ref="Mogi.UserCustomCommandAction"/>
-      <add-to-group group-id="VcsNavBarToobarActions" anchor="last"/>
+      <add-to-group group-id="VcsNavBarToolbarActions" anchor="last"/>
     </group>
 
     <group id="MogiToolbarActionsGroup">
@@ -60,7 +57,7 @@
       <reference ref="Mogi.SubmoduleCheckoutAction"/>
       <reference ref="Mogi.UserCustomCommandAction"/>
       <separator/>
-      <add-to-group group-id="VcsToobarActions" anchor="last"/>
+      <add-to-group group-id="VcsToolbarActions" anchor="last"/>
     </group>
 
     <group id="MogiMenuGroup" text="Mogi">

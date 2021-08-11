@@ -19,6 +19,7 @@
     <!-- Add your extensions here -->
     <projectConfigurable instance="be.msdc.mogi.settings.MogiConfigurable" />
     <applicationService serviceImplementation="be.msdc.mogi.settings.MogiSettings"/>
+    <notificationGroup displayType="BALLOON" id="Mogi Notification Group" key="notification.group"/>
   </extensions>
 
   <actions resource-bundle="mogi">

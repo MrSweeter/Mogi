@@ -196,13 +196,5 @@ public class MogiSettingsPanel {
             }
         }
     }
-
-    /*private Project getProject() {
-        DataManager dm = DataManager.getInstanceIfCreated();
-        if (dm != null) {
-            return (Project) dm.getDataContext(rootPanel).getData(CommonDataKeys.PROJECT.getName());
-        }
-        return null;
-    }*/
     //endregion
 }

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 16 16">
+
+    <path fill="none" stroke="#3592C4" stroke-width="2" stroke-linecap="square" fill-rule="evenodd"
+          d="M8,4 C8,8 13,5 13,9"/>
+    <path fill="none" stroke="#3592C4" stroke-width="2" stroke-linecap="square" fill-rule="evenodd"
+          d="M8,4 C8,8 3,5 3,9"/>
+    <path fill="none" stroke="#F0A732" stroke-width="2" stroke-linecap="square" fill-rule="evenodd" d="M8,4 V12"/>
+
+    <circle cx="8" cy="2" r="1.5" fill="none" stroke="#F0A732" stroke-width="1"/>
+    <polygon fill="#F0A732" points="8 16 11 13 5 13"/>
+    <polygon fill="#3592C4" points="3 13 6 10 0 10"/>
+    <polygon fill="#3592C4" points="13 13 16 10 10 10"/>
+
+</svg>

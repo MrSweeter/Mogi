@@ -2,7 +2,7 @@ package be.msdc.mogi.actions
 
 import be.msdc.mogi.models.commands.MogiCommand
 import be.msdc.mogi.utils.MogiException
-import be.msdc.mogi.utils.NotificationManager
+import be.msdc.mogi.utils.MogiNotificationManager
 import be.msdc.mogi.utils.ProcessRunner
 import be.msdc.mogi.utils.getMogiString
 import com.intellij.openapi.actionSystem.AnAction
@@ -16,13 +16,13 @@ abstract class AnMogiAction : AnAction() {
                 try {
                     val result = ProcessRunner.run(cmd, workingDirectory)
                     if (result.isSuccess()) {
-                        NotificationManager.info(
+                        MogiNotificationManager.info(
                             getMogiString("notification.command.success", cmd.name),
                             result.success,
                             project
                         )
                     } else {
-                        NotificationManager.warning(
+                        MogiNotificationManager.warning(
                             getMogiString("notification.command.fail", cmd.name),
                             cmd.toString() + "\n\n" + result.fail,
                             project
@@ -30,7 +30,7 @@ abstract class AnMogiAction : AnAction() {
                     }
 
                 } catch (ex: MogiException) {
-                    NotificationManager.error(ex, project)
+                    MogiNotificationManager.error(ex, project)
                 }
             }
         }

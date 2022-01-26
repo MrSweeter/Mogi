@@ -1,14 +1,14 @@
 <idea-plugin>
   <id>be.msdc.mogi</id>
   <name>Mogi</name>
-  <version>0.0.8</version>
+  <version>0.0.9</version>
   <vendor email="dev.msdc@gmail.com">MSDC</vendor>
 
   <description>Execute git submodule command easily with a toolbar button</description>
 
   <change-notes>Execute git submodule command easily with a toolbar button</change-notes>
 
-  <idea-version since-build="203"/>
+  <idea-version since-build="211"/>
 
   <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
        on how to target different products -->
